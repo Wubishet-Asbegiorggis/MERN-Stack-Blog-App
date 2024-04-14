@@ -20,15 +20,14 @@ const Article = () => {
       const result = await fetch(`/api/articles/${name}`);
       const body = await result.json();
       console.log(body);
-      setArticleInfo(body);
+      setArticleInfo(body || { comments: [] }); // Ensure articleInfo is initialized
     };
     fetchData();
   }, [name]);
 
   if (!article) return <NotFound />;
-  const otherArticles = articleContent.filter(
-    (article) => article.name !== name
-  );
+  
+  // Check if articleInfo exists and has comments before rendering CommentsList
   return (
     <>
       <h1 className='sm:text-4xl text-2xl font-bold my-6 text-gray-900'>
@@ -39,13 +38,17 @@ const Article = () => {
           {paragraph}
         </p>
       ))}
-      <CommentsList comments={articleInfo.comments} />
-      <AddCommentForm articleName={name} setArticleInfo={setArticleInfo} />
+      {articleInfo && articleInfo.comments && (
+        <>
+          <CommentsList comments={articleInfo.comments} />
+          <AddCommentForm articleName={name} setArticleInfo={setArticleInfo} />
+        </>
+      )}
       <h1 className='sm:text-2xl text-xl font-bold my-4 text-gray-900'>
         Other Articles
       </h1>
       <div className='flex flex-wrap -m-4'>
-        <Articles articles={otherArticles} />
+        <Articles articles={articleContent.filter(article => article.name !== name)} />
       </div>
     </>
   );
