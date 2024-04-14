@@ -1,0 +1,28 @@
+{
+  "name": "mern-blog",
+  "version": "1.0.0",
+  "description": "Mern app to learn fullstack development",
+  "main": "server.js",
+  "scripts": {
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [],
+  "author": "Tech Academy",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongodb": "^4.7.0",
+    "react": "^18.2.0",
+    "react-router": "^6.22.3",
+    "react-router-dom": "^6.22.3",
+    "react-scripts": "^5.0.1",
+    "tailwindcss": "^3.4.3",
+    "web-vitals": "^3.5.2"
+  },
+  "devDependencies": {
+    "concurrently": "^7.2.2",
+    "nodemon": "^2.0.19"
+  }
+}
